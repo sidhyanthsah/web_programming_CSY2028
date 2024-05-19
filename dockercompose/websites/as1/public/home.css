@@ -1,0 +1,243 @@
+/* Import website font */
+@import url('https://stockfont.org/?3e1218d9a01517d5734a1be9e67be4af797abff1230ab272235ec8ed759251d6');
+
+
+* {
+	margin: 0;
+
+	padding: 0;
+}
+
+body { font-family: 'Oxygen-Regular', sans-serif; background-color: #f6f5f4; max-width: 100vw; overflow-x: hidden;}
+h1, h2, h3, h4 { font-weight: normal; }
+
+
+.container-fluid{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+  flex-direction: column;
+  
+  }
+  
+  .container{
+   width: 100vw;
+   height: 100%;
+   display: flex;
+   flex-direction: row;
+  }
+  .box{
+      width: 50%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
+  .box1{
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  width: 45%;
+  height: 98%;
+  display: flex;
+  flex-direction: column;  
+  align-items: center;
+  }
+  
+  
+  .textarea{
+      height: 150px;
+      width: 150px;
+  }
+  
+  .hello{
+   color: red;
+  }
+
+
+  .lambo{
+    height: 80%;
+    width: 80%;
+}
+  
+
+  .form{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+  
+  /* .input{
+      width: 50%;
+      height: 40px;
+      margin-bottom: 5px;
+      margin-top: 5px;
+      border-radius: 4px;
+  } */
+  
+  
+  
+  .input {
+      width: 90%; /* Adjusted to 100% width */
+      height: 40px;
+      margin-bottom: 10px; /* Increased margin for better spacing */
+      margin-top: 10px;
+      border: 2px solid #ccc; /* Added border */
+      border-radius: 8px; /* Increased border radius for smoother corners */
+      padding: 8px; /* Added padding for better text alignment */
+      font-size: 16px; /* Adjusted font size for better readability */
+      box-sizing: border-box; /* Added to include padding and border in the width */
+      transition: border-color 0.3s ease; /* Added transition effect for border color change */
+  }
+  
+  /* Hover effect */
+  .input:hover {
+      border-color: #aaa; /* Darker border color on hover */
+  }
+  
+  /* Focus effect */
+  .input:focus {
+      outline: none; /* Removed default focus outline */
+      border-color: #007bff; /* Custom focus border color */
+  }
+  
+  
+  
+  .btn {
+      width: 40%; /* Adjusted to 100% width */
+      height: 40px;
+      background-color: #3665f3;
+      color: white;
+      font-size: 16px; /* Adjusted font size for better readability */
+      font-weight: bold;
+      border: none; /* Removed border */
+      border-radius: 8px; /* Increased border radius for smoother corners */
+      cursor: pointer; /* Added pointer cursor for better usability */
+      transition: background-color 0.3s ease; /* Added transition effect for background color change */
+  }
+  
+  /* Hover effect */
+  .btn:hover {
+      background-color: #2a4aaf; /* Darker background color on hover */
+  }
+  
+  
+  
+  
+  .i {
+      color: #e43137;
+  }
+   .b {
+      color: #0063d1;
+  }
+   .u {
+      color: #f4ae01;
+  }
+   .y {
+      color: #85b716;
+  }
+  
+  
+
+.row{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.div{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+
+select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    cursor: pointer;
+    width: 90%; /* Adjust width as needed */
+}
+
+/* Style the option elements */
+option {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+/* Style the select when hovered */
+select:hover {
+    border-color: #999;
+}
+
+/* Style the select when focused */
+select:focus {
+    outline: none;
+    border-color: #666;
+}
+
+/* Style the select when it has a value selected */
+select:valid {
+    border-color: #666;
+}
+
+.file-input {
+    display: none; /* Hide the default file input */
+  }
+  
+  .file-label {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+  }
+  
+  /* Style the label when hovering */
+  .file-label:hover {
+    background-color: #45a049;
+  }
+
+.box2{
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    width: 45%;
+    height: 98%;
+    display: flex;
+    flex-direction: column;  
+    justify-content: center; 
+}
+
+.category-list {
+    list-style: none;
+    padding: 0;
+}
+
+.category-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.category-list li:last-child {
+    border-bottom: none;
+}
+
+.category-list li .actions a {
+    margin-left: 10px;
+    text-decoration: none;
+    color: #007bff;
+}
+
+.category-list li .actions a:hover {
+    color: #0056b3;
+}

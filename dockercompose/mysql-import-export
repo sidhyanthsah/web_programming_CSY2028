@@ -1,0 +1,50 @@
+#!/bin/sh
+
+: ${MYSQL_ROOT_PASSWORD="student"}
+: ${MYSQL_PASSWORD="student"}
+: ${MYSQL_USER="student"}
+
+# Wait for enough time for mysql to have started
+sleep 5
+
+# Try to connect
+mysqladmin -h mysql -u student -pstudent processlist >&- 2>&-
+
+while [ $? -ne 0 ]
+do
+    sleep 5
+    mysqladmin -h mysql -u student -pstudent processlist >&- 2>&-
+done
+
+# Update the student user to allow creating tables
+mysql -u student -p$MYSQL_ROOT_PASSWORD -h mysql -e "GRANT ALL PRIVILEGES ON *.* TO '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD' WITH GRANT OPTION; FLUSH PRIVILEGES;"
+
+# Add the student and s.je users
+mysql -u student -p$MYSQL_ROOT_PASSWORD -h mysql -e "CREATE USER IF NOT EXISTS 's.je'@'%' IDENTIFIED BY 'student'"
+mysql -u student -p$MYSQL_ROOT_PASSWORD -h mysql -e "GRANT ALL PRIVILEGES ON *.* TO 's.je'@'%' IDENTIFIED BY 'student' WITH GRANT OPTION; FLUSH PRIVILEGES;"
+mysql -u student -p$MYSQL_ROOT_PASSWORD -h mysql -e "CREATE USER IF NOT EXISTS 'student'@'%' IDENTIFIED BY 'student'"
+mysql -u student -p$MYSQL_ROOT_PASSWORD -h mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'student'@'%' IDENTIFIED BY 'student' WITH GRANT OPTION; FLUSH PRIVILEGES;"
+
+if [ -f "/websites/database.sql" ]; then
+    mysql -u student -p$MYSQL_ROOT_PASSWORD -h mysql < /websites/database.sql
+fi
+
+# Define cleanup procedure
+cleanup() {
+    echo "Dumping database.sql"
+    DB_LIST=`mysql -u student -pstudent -h mysql -Nse "SELECT GROUP_CONCAT(SCHEMA_NAME SEPARATOR ' ') FROM information_schema.SCHEMATA WHERE SCHEMA_NAME NOT IN ('mysql','information_schema','performance_schema','sys');"`
+    mysqldump -R -B $DB_LIST -h mysql -u root -p$MYSQL_ROOT_PASSWORD > /websites/database.sql
+}
+
+# Trap SIGTERM
+trap 'cleanup' SIGTERM
+
+while true
+do
+    sleep 15
+    if [ -f "/websites/import.sql" ]; then
+        echo "Digesting import.sql..."
+        mysql -u root -p$MYSQL_ROOT_PASSWORD -h mysql < /websites/import.sql
+        rm /websites/import.sql
+    fi
+done
